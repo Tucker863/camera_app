@@ -59,7 +59,16 @@ class ImageScreen extends StatefulWidget {
 
 class _ImageScreenState extends State<ImageScreen>{
 
+  File _image;
   File _cameraImage;
+
+  _pickImageFromGallery() async {
+    File image = await  ImagePicker.pickImage(source: ImageSource.gallery, imageQuality: 50);
+
+    setState(() {
+      _image = image;
+    });
+  }
 
   _pickImageFromCamera() async {
     File image = await  ImagePicker.pickImage(source: ImageSource.camera, imageQuality: 50);
@@ -92,6 +101,19 @@ class _ImageScreenState extends State<ImageScreen>{
                 padding: const EdgeInsets.all(16.0),
                 child: Column(
                     children: <Widget>[
+                      if(_image != null)
+                        Image.file(_image)
+                      else
+                        Text("Click on Pick Image to select an Image", style: TextStyle(fontSize: 18.0),),
+                      RaisedButton(
+                        onPressed: () {
+                          _pickImageFromGallery();
+                        },
+                        child: Text("Pick Image From Gallery"),
+                      ),
+                      SizedBox(
+                        height: 16.0,
+                      ),
                       if(_cameraImage != null)
                         Image.file(_cameraImage)
                       else
@@ -129,9 +151,20 @@ class VideoScreen extends StatefulWidget {
 
 class _VideoScreenState extends State<VideoScreen>{
 
+  File _video;
   File _cameraVideo;
 
+  VideoPlayerController _videoPlayerController;
   VideoPlayerController _cameraVideoPlayerController;
+
+  _pickVideo() async {
+    File video = await ImagePicker.pickVideo(source: ImageSource.gallery);
+    _video = video;
+    _videoPlayerController = VideoPlayerController.file(_video)..initialize().then((_) {
+      setState(() { });
+      _videoPlayerController.play();
+    });
+  }
 
   _pickVideoFromCamera() async {
     File video = await ImagePicker.pickVideo(source: ImageSource.camera);
@@ -153,6 +186,21 @@ class _VideoScreenState extends State<VideoScreen>{
                 padding: const EdgeInsets.all(16.0),
                 child: Column(
                     children: <Widget>[
+                      if(_video != null)
+                        _videoPlayerController.value.initialized
+                            ? AspectRatio(
+                          aspectRatio: _videoPlayerController.value.aspectRatio,
+                          child: VideoPlayer(_videoPlayerController),
+                        )
+                            : Container()
+                      else
+                        Text("Click on Pick Video to select video", style: TextStyle(fontSize: 18.0),),
+                      RaisedButton(
+                        onPressed: () {
+                          _pickVideo();
+                        },
+                        child: Text("Pick Video From Gallery"),
+                      ),
 
                       if(_cameraVideo != null)
                         _cameraVideoPlayerController.value.initialized
