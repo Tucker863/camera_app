@@ -86,34 +86,36 @@ class _ImageScreenState extends State<ImageScreen>{
 
       ),
       ),
-      body: Center(
-        child: Container(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            children: <Widget>[
-              if(_cameraImage != null)
-                Image.file(_cameraImage)
-              else
-                Text("Take a picture", style: TextStyle(fontSize: 18.0),),
-              RaisedButton(
-                onPressed: () {
-                  _pickImageFromCamera();
-                },
-                child: new Icon(
-                  Icons.add,
-                  size: 36.0,
-                ),
-              ),
-              RaisedButton(
-                onPressed: () {
-                  // Navigate back to the first screen by popping the current route
-                  // off the stack.
-                  Navigator.pop(context);
-                },
-                child: Text('Go back!'),
-              ),
-            ]
-          )
+      body: SingleChildScrollView(
+        child: Center(
+            child: Container(
+                padding: const EdgeInsets.all(16.0),
+                child: Column(
+                    children: <Widget>[
+                      if(_cameraImage != null)
+                        Image.file(_cameraImage)
+                      else
+                        Text("Take a picture", style: TextStyle(fontSize: 18.0),),
+                      RaisedButton(
+                        onPressed: () {
+                          _pickImageFromCamera();
+                        },
+                        child: new Icon(
+                          Icons.add,
+                          size: 36.0,
+                        ),
+                      ),
+                      RaisedButton(
+                        onPressed: () {
+                          // Navigate back to the first screen by popping the current route
+                          // off the stack.
+                          Navigator.pop(context);
+                        },
+                        child: Text('Go back!'),
+                      ),
+                    ]
+                )
+            )
         )
       ),
     );
