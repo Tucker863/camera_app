@@ -2,6 +2,8 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:video_player/video_player.dart';
+import 'package:camreatest/Screens/todo_list.dart';
+import 'package:camreatest/Screens/todo_detail.dart';
 
 void main() {
   runApp(MaterialApp(
@@ -11,6 +13,7 @@ void main() {
       '/': (context) => HomeScreen(),
       '/second': (context) => ImageScreen(),
       '/third': (context) => VideoScreen(),
+      '/todoapp': (context) => TodoApp(),
     },
   ));
 }
@@ -42,8 +45,12 @@ class HomeScreen extends StatelessWidget {
                 Navigator.pushNamed(context, '/third');
               },
             ),
-            new Text(
-                "Ready to use camera"
+            new RaisedButton(
+              child: Text('List App'),
+              onPressed: () {
+                // Navigate to the second screen using a named route.
+                Navigator.pushNamed(context, '/todoapp');
+              },
             ),
           ],
         ),
@@ -234,6 +241,22 @@ class _VideoScreenState extends State<VideoScreen>{
             )
         )
       ),
+    );
+  }
+}
+
+class TodoApp extends StatelessWidget {
+
+  @override
+  Widget build(BuildContext context) {
+
+    return MaterialApp(
+      title: 'TodoList',
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+          primarySwatch: Colors.blue
+      ),
+      home: TodoList(),
     );
   }
 }
