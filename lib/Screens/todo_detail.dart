@@ -43,7 +43,6 @@ class TodoDetailState extends State<TodoDetail> {
     return WillPopScope(
 
 	    onWillPop: () {
-	    	// Write some code to control things, when user press Back navigation button in device navigationBar
 		    moveToLastScreen();
 	    },
 
@@ -64,30 +63,6 @@ class TodoDetailState extends State<TodoDetail> {
 		    child: ListView(
 			    children: <Widget>[
 
-			    	// First element
-				    // ListTile(
-					  //   title: DropdownButton(
-						// 	    items: _priorities.map((String dropDownStringItem) {
-						// 	    	return DropdownMenuItem<String> (
-						// 			    value: dropDownStringItem,
-						// 			    child: Text(dropDownStringItem),
-						// 		    );
-						// 	    }).toList(),
-
-						// 	    style: textStyle,
-
-						// 	    value: getPriorityAsString(todo.priority),
-
-						// 	    onChanged: (valueSelectedByUser) {
-						// 	    	setState(() {
-						// 	    	  debugPrint('User selected $valueSelectedByUser');
-						// 	    	  updatePriorityAsInt(valueSelectedByUser);
-						// 	    	});
-						// 	    }
-					  //   ),
-				    // ),
-
-				    // Second Element
 				    Padding(
 					    padding: EdgeInsets.only(top: 15.0, bottom: 15.0),
 					    child: TextField(
@@ -184,33 +159,6 @@ class TodoDetailState extends State<TodoDetail> {
 		Navigator.pop(context, true);
   }
 
-	// Convert the String priority in the form of integer before saving it to Database
-	// void updatePriorityAsInt(String value) {
-	// 	switch (value) {
-	// 		case 'High':
-	// 			todo.priority = 1;
-	// 			break;
-	// 		case 'Low':
-	// 			todo.priority = 2;
-	// 			break;
-	// 	}
-	// }
-
-	// Convert int priority to String priority and display it to user in DropDown
-	// String getPriorityAsString(int value) {
-	// 	String priority;
-	// 	switch (value) {
-	// 		case 1:
-	// 			priority = _priorities[0];  // 'High'
-	// 			break;
-	// 		case 2:
-	// 			priority = _priorities[1];  // 'Low'
-	// 			break;
-	// 	}
-	// 	return priority;
-	// }
-
-	// Update the title of todo object
   void updateTitle(){
     todo.title = titleController.text;
   }
