@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:http/http.dart' as http;
 
-const baseUrl = "http://bigpicturepal.com/api/product/read.php";
+const baseUrl = "http://bigpicturepal.com/Tucker_api/product/read.php";
 
 class API {
   static Future getProductsFromApi() {
