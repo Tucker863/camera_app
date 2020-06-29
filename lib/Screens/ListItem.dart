@@ -22,6 +22,7 @@ class ListItemState extends State<ListItem> {
   @override
   Widget build(BuildContext context) {
     Color color = Theme.of(context).primaryColor;
+
     Widget buttonSection = Container(
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -83,6 +84,12 @@ class ListItemState extends State<ListItem> {
         home: Scaffold(
           appBar: AppBar(
             title: Text(appBarTitle),
+            leading: IconButton(
+                icon: Icon(Icons.arrow_back),
+                onPressed: () {
+                  // Write some code to control things, when user press back button in AppBar
+                  moveToLastScreen();
+                }),
           ),
           body: ListView(
             children: [
@@ -119,5 +126,9 @@ class ListItemState extends State<ListItem> {
         ),
       ],
     );
+  }
+
+  void moveToLastScreen() {
+    Navigator.pop(context, true);
   }
 }
