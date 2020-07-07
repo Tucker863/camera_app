@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:camreatest/Screens/todo_list.dart';
 import 'Screens/ImageScreen.dart';
 import 'dart:convert';
-import 'package:camreatest/Utils/API.dart';
-import 'package:camreatest/Screens/APIList.dart';
 import 'package:http/http.dart' as http;
 import 'dart:async';
+
+import 'Screens/MainList.dart';
 
 void main() {
   runApp(MaterialApp(
@@ -14,8 +14,8 @@ void main() {
     routes: {
       '/': (context) => HomeScreen(),
       '/second': (context) => ImageScreen(),
-      '/third': (context) => APIList(),
-      '/todoapp': (context) => TodoApp(),
+      '/third': (context) => MainList(),
+      '/todoapp': (context) => TodoList(),
     },
   ));
 }
@@ -41,7 +41,7 @@ class HomeScreen extends StatelessWidget {
               },
             ),
             new RaisedButton(
-              child: Text('Take a video'),
+              child: Text('List App'),
               onPressed: () {
                 // Navigate to the second screen using a named route.
                 Navigator.pushNamed(context, '/third');
@@ -61,60 +61,36 @@ class HomeScreen extends StatelessWidget {
   }
 }
 
-class TodoApp extends StatelessWidget {
-
-  @override
-  Widget build(BuildContext context) {
-
-    return MaterialApp(
-      title: 'TodoList',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-          primarySwatch: Colors.blue
-      ),
-      home: TodoList(),
-    );
-  }
-}
-
 class HomePage extends StatefulWidget {
   @override
   HomePageState createState() => new HomePageState();
 }
 
 class HomePageState extends State<HomePage> {
-
   List data;
-
   Future<String> getData() async {
     var response = await http.get(
         Uri.encodeFull("http://bigpicturepal.com/Tucker_api/product/read.php"),
-        headers: {
-          "Accept": "application/json"
-        }
-    );
-
+        headers: {"Accept": "application/json"});
     this.setState(() {
       data = json.decode(response.body);
     });
-
-    print(data[1]["description"]);
-
     return "Success!";
   }
 
   @override
-  void initState(){
+  void initState() {
     this.getData();
   }
 
   @override
-  Widget build(BuildContext context){
+  Widget build(BuildContext context) {
     return new Scaffold(
-      appBar: new AppBar(title: new Text("Listviews"), backgroundColor: Colors.blue),
+      appBar: new AppBar(
+          title: new Text("Listviews"), backgroundColor: Colors.blue),
       body: new ListView.builder(
         itemCount: data == null ? 0 : data.length,
-        itemBuilder: (BuildContext context, int index){
+        itemBuilder: (BuildContext context, int index) {
           return new Card(
             child: new Text(data[index]["description"]),
           );

@@ -95,7 +95,7 @@ class ListItemState extends State<ListItem> {
             children: [
               titleSection,
               Image.asset(
-                'images/logov1.jpg',
+                'assets/logov1.jpg',
                 width: 240,
                 height: 240,
                 fit: BoxFit.contain,
