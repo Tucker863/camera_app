@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:camreatest/Screens/todo_list.dart';
+import 'Screens/GalleryImage.dart';
+import 'package:gallery_saver/gallery_saver.dart';
 import 'Screens/ImageScreen.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
@@ -13,7 +15,7 @@ void main() {
     initialRoute: '/',
     routes: {
       '/': (context) => HomeScreen(),
-      '/second': (context) => ImageScreen(),
+      '/second': (context) => MyApp(),
       '/third': (context) => MainList(),
       '/todoapp': (context) => TodoList(),
     },
