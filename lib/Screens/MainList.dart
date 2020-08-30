@@ -1,9 +1,11 @@
+import 'package:camreatest/Models/Book.dart';
+import 'package:camreatest/Screens/APIListProduct.dart';
 import 'package:camreatest/Screens/ListItem.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-import 'package:camreatest/Screens/APIList.dart';
 import 'package:camreatest/Utils/API.dart';
+import 'package:camreatest/Screens/APIListSearch.dart';
 
 /// This Widget is the main application widget.
 class MainList extends StatelessWidget {
@@ -30,10 +32,25 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   static const TextStyle optionStyle =
       TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
 
+  static const List<Widget> _titleOptions = <Widget>[
+    Text(
+      'List of Books',
+      style: optionStyle,
+    ),
+    Text(
+      'List of Products',
+      style: optionStyle,
+    ),
+    Text(
+      'List of Boxes',
+      style: optionStyle,
+    ),
+  ];
+
   static List<StatefulWidget> _stateOptions = <StatefulWidget>[
     APIList(),
-    APIList(),
-    APIList(),
+    APIListSearch(),
+    APIListProduct(),
   ];
 
   void _onItemTapped(int index) {
@@ -46,7 +63,19 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('List Home Screen'),
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Image.asset(
+              'assets/logov1.jpg',
+              fit: BoxFit.contain,
+              height: 56,
+            ),
+            Container(
+                padding: const EdgeInsets.all(10.0),
+                child: _titleOptions.elementAt(_selectedIndex))
+          ],
+        ),
       ),
       body: Center(
         child: _stateOptions.elementAt(_selectedIndex),
@@ -59,7 +88,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.business),
-            title: Text('List of Cars'),
+            title: Text('Search Books'),
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.school),
@@ -80,29 +109,29 @@ class APIList extends StatefulWidget {
 }
 
 class _APIListState extends State<APIList> {
-  var products = new List<ProductMax>();
+  var books = new List<Book>();
 
-  _getUsers() {
-    API.getProductsFromApi().then((response) {
+  _getBooks() {
+    API.getAllBooksFromApi().then((response) {
       setState(() {
         Iterable list = json.decode(response.body);
-        products = list.map((model) => ProductMax.fromJson(model)).toList();
+        books = list.map((model) => Book.fromJson(model)).toList();
       });
     });
   }
 
   initState() {
     super.initState();
-    _getUsers();
+    _getBooks();
   }
 
   dispose() {
     super.dispose();
   }
 
-  void _onPressed(ProductMax product, String appBarTitle) {
+  void _onPressed(Book book, String appBarTitle) {
     Navigator.push(context, MaterialPageRoute(builder: (context) {
-      return ListItem(product, appBarTitle);
+      return ListItem(book, appBarTitle);
     }));
   }
 
@@ -110,13 +139,12 @@ class _APIListState extends State<APIList> {
   build(context) {
     return Scaffold(
         body: ListView.builder(
-      itemCount: products.length,
+      itemCount: books.length,
       itemBuilder: (context, index) {
         return ListTile(
             title: RaisedButton(
-                onPressed: () =>
-                    _onPressed(products[index], products[index].name),
-                child: new Text(products[index].name)));
+                onPressed: () => _onPressed(books[index], books[index].title),
+                child: new Text(books[index].title)));
       },
     ));
   }

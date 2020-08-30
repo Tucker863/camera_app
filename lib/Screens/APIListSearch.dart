@@ -1,11 +1,7 @@
 import 'dart:convert';
 import 'package:camreatest/Models/Book.dart';
-import 'package:camreatest/Screens/ListItem.dart';
 import 'package:camreatest/Utils/API.dart';
 import 'package:flutter/material.dart';
-import 'dart:math';
-import 'package:flappy_search_bar/flappy_search_bar.dart';
-import 'package:flappy_search_bar/scaled_tile.dart';
 
 class APIListSearch extends StatefulWidget {
   @override
@@ -99,7 +95,7 @@ class Search extends SearchDelegate {
   final List<String> listExample;
   Search(this.listExample);
 
-  List<String> recentList = ["Text 4", "Text 3"];
+  List<String> recentList = new List<String>();
 
   @override
   Widget buildSuggestions(BuildContext context) {

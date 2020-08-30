@@ -1,43 +1,39 @@
 import 'dart:convert';
-import 'package:camreatest/Models/Book.dart';
+import 'package:camreatest/Models/Product.dart';
 import 'package:camreatest/Screens/ListItem.dart';
+import 'package:camreatest/Screens/ListItemProduct.dart';
 import 'package:camreatest/Utils/API.dart';
 import 'package:flutter/material.dart';
-import 'dart:math';
-import 'package:flappy_search_bar/flappy_search_bar.dart';
-import 'package:flappy_search_bar/scaled_tile.dart';
 
-class APIList extends StatefulWidget {
+class APIListProduct extends StatefulWidget {
   @override
   _APIListState createState() => _APIListState();
 }
 
-class _APIListState extends State<APIList> {
-  var products = new List<Book>();
+class _APIListState extends State<APIListProduct> {
+  var products = new List<Product>();
 
-  _getUsers() {
-    API.getAllBooksFromApi().then((response) {
+  _getProducts() {
+    API.getAllProductsFromApi().then((response) {
       setState(() {
         Iterable list = json.decode(response.body);
-        products = list.map((model) => Book.fromJson(model)).toList();
+        products = list.map((model) => Product.fromJson(model)).toList();
       });
     });
   }
 
   initState() {
     super.initState();
-    _getUsers();
+    _getProducts();
   }
 
   dispose() {
     super.dispose();
   }
 
-  String _value = 'Hello World';
-
-  void _onPressed(Book book, String appBarTitle) {
+  void _onPressed(Product product, String appBarTitle) {
     Navigator.push(context, MaterialPageRoute(builder: (context) {
-      return ListItem(book, appBarTitle);
+      return ListItemProduct(product, appBarTitle);
     }));
   }
 
@@ -53,8 +49,8 @@ class _APIListState extends State<APIList> {
             return ListTile(
                 title: RaisedButton(
                     onPressed: () =>
-                        _onPressed(products[index], products[index].title),
-                    child: new Text(products[index].title)));
+                        _onPressed(products[index], products[index].name),
+                    child: new Text(products[index].name)));
           },
         ));
   }

@@ -1,23 +1,24 @@
-import 'package:camreatest/Models/Book.dart';
+import 'package:camreatest/Models/Product.dart';
+import 'package:camreatest/Models/Product.dart';
 import 'package:flutter/material.dart';
 
-class ListItem extends StatefulWidget {
+class ListItemProduct extends StatefulWidget {
   final String appBarTitle;
-  final Book book;
+  final Product product;
 
-  ListItem(this.book, this.appBarTitle);
+  ListItemProduct(this.product, this.appBarTitle);
 
   @override
   State<StatefulWidget> createState() {
-    return ListItemState(this.book, this.appBarTitle);
+    return ListItemProductState(this.product, this.appBarTitle);
   }
 }
 
-class ListItemState extends State<ListItem> {
+class ListItemProductState extends State<ListItemProduct> {
   String appBarTitle;
-  Book book;
+  Product product;
 
-  ListItemState(this.book, this.appBarTitle);
+  ListItemProductState(this.product, this.appBarTitle);
 
   @override
   Widget build(BuildContext context) {
@@ -47,14 +48,14 @@ class ListItemState extends State<ListItem> {
                 Container(
                   padding: const EdgeInsets.only(bottom: 8),
                   child: Text(
-                    book.author,
+                    product.name,
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                     ),
                   ),
                 ),
                 Text(
-                  book.storage,
+                  product.description,
                   style: TextStyle(
                     color: Colors.grey[500],
                   ),
@@ -67,7 +68,7 @@ class ListItemState extends State<ListItem> {
             Icons.star,
             color: Colors.red[500],
           ),
-          Text(book.year.toString()),
+          Text(product.id.toString()),
         ],
       ),
     );
@@ -75,7 +76,7 @@ class ListItemState extends State<ListItem> {
     Widget textSection = Container(
       padding: const EdgeInsets.all(32),
       child: Text(
-        book.origRetail,
+        product.name,
         softWrap: true,
       ),
     );

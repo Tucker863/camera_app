@@ -1,23 +1,44 @@
+import 'dart:convert';
+
+import 'package:camreatest/Models/BookAPI.dart';
 import 'package:camreatest/Models/Book.dart';
+import 'package:camreatest/Utils/API.dart';
 import 'package:flutter/material.dart';
 
-class ListItem extends StatefulWidget {
+class ListItemBookAPI extends StatefulWidget {
   final String appBarTitle;
   final Book book;
 
-  ListItem(this.book, this.appBarTitle);
+  ListItemBookAPI(this.book, this.appBarTitle);
 
   @override
   State<StatefulWidget> createState() {
-    return ListItemState(this.book, this.appBarTitle);
+    return ListItemBookAPIState(this.book, this.appBarTitle);
   }
 }
 
-class ListItemState extends State<ListItem> {
+class ListItemBookAPIState extends State<ListItemBookAPI> {
   String appBarTitle;
   Book book;
+  _getBookDetail() {
+    API.getGoogleBookFromApi(book.isbn).then((response) {
+      setState(() {
+        Map<String, dynamic> detail = json.decode(response.body);
+        var bookAPI = detail['kind']['ind']['subject']['isbn'][''];
+      });
+    });
+  }
 
-  ListItemState(this.book, this.appBarTitle);
+  initState() {
+    super.initState();
+    _getBookDetail();
+  }
+
+  dispose() {
+    super.dispose();
+  }
+
+  ListItemBookAPIState(this.book, this.appBarTitle);
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +68,7 @@ class ListItemState extends State<ListItem> {
                 Container(
                   padding: const EdgeInsets.only(bottom: 8),
                   child: Text(
-                    book.author,
+                    book.title,
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                     ),

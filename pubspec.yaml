@@ -29,6 +29,9 @@ dependencies:
   sqflite: any
   path_provider: any
   intl: ^0.15.7
+  flappy_search_bar: ^1.7.2
+  gallery_saver: ^2.0.1
+  permission_handler: ^3.0.0
 
 dev_dependencies:
   flutter_test:

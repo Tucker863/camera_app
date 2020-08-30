@@ -15,7 +15,7 @@ void main() {
     initialRoute: '/',
     routes: {
       '/': (context) => HomeScreen(),
-      '/second': (context) => MyApp(),
+      '/second': (context) => ImageScreen(),
       '/third': (context) => MainList(),
       '/todoapp': (context) => TodoList(),
     },
