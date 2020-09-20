@@ -1,3 +1,5 @@
+import 'package:camreatest/Screens/FormField.dart' as ff;
+import 'package:camreatest/Screens/BarCodeScan.dart';
 import 'package:flutter/material.dart';
 import 'package:camreatest/Screens/todo_list.dart';
 import 'Screens/GalleryImage.dart';
@@ -16,8 +18,8 @@ void main() {
     routes: {
       '/': (context) => HomeScreen(),
       '/second': (context) => ImageScreen(),
-      '/third': (context) => MainList(),
-      '/todoapp': (context) => TodoList(),
+      '/third': (context) => ff.FormField(),
+      '/todoapp': (context) => BarCodeScan(),
     },
   ));
 }

@@ -45,18 +45,14 @@ class _APIListState extends State<APIListBook> {
   @override
   build(context) {
     return Scaffold(
-        appBar: AppBar(
-          title: Text("API List"),
-        ),
         body: ListView.builder(
-          itemCount: books.length,
-          itemBuilder: (context, index) {
-            return ListTile(
-                title: RaisedButton(
-                    onPressed: () =>
-                        _onPressed(books[index], books[index].title),
-                    child: new Text(books[index].title)));
-          },
-        ));
+      itemCount: books.length,
+      itemBuilder: (context, index) {
+        return ListTile(
+            title: RaisedButton(
+                onPressed: () => _onPressed(books[index], books[index].title),
+                child: new Text(books[index].title)));
+      },
+    ));
   }
 }

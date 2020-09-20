@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:gallery_saver/gallery_saver.dart';
+import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 
 class ImageScreen extends StatefulWidget {
   @override
@@ -38,10 +39,10 @@ class _ImageScreenState extends State<ImageScreen> {
         setState(() {
           firstButtonText = 'saving in progress...';
         });
-        GallerySaver.saveImage(recordedImage.path, albumName: 'Media')
+        GallerySaver.saveImage(recordedImage.path, albumName: 'Gallery')
             .then((bool success) {
           setState(() {
-            firstButtonText = 'image saved!';
+            firstButtonText = 'image saved to Gallery';
             _cameraImage = recordedImage;
           });
         });

@@ -28,10 +28,12 @@ dependencies:
   video_player: ^0.10.2
   sqflite: any
   path_provider: any
-  intl: ^0.15.7
+  intl: ^0.16.1
   flappy_search_bar: ^1.7.2
   gallery_saver: ^2.0.1
   permission_handler: ^3.0.0
+  flutter_barcode_scanner: ^1.0.1
+
 
 dev_dependencies:
   flutter_test:
