@@ -1,5 +1,6 @@
 import 'package:camreatest/Screens/FormField.dart' as ff;
 import 'package:camreatest/Screens/BarCodeScan.dart';
+import 'package:camreatest/Screens/TabScreen.dart' as tab;
 import 'package:flutter/material.dart';
 import 'package:camreatest/Screens/todo_list.dart';
 import 'Screens/GalleryImage.dart';
@@ -17,7 +18,7 @@ void main() {
     initialRoute: '/',
     routes: {
       '/': (context) => HomeScreen(),
-      '/second': (context) => ImageScreen(),
+      '/second': (context) => tab.MyApp(),
       '/third': (context) => ff.FormField(),
       '/todoapp': (context) => BarCodeScan(),
     },

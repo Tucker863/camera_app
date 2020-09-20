@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 Future<Album> makePostRequest(String title, String author) async {
-  final uri = 'http://httpbin.org/post';
+  final uri = 'http://bigpicturepal.com/lumen-api/books';
   final headers = {'Content-Type': 'application/json'};
   Map<String, dynamic> body = {'title': title, 'author': author};
   String jsonBody = json.encode(body);
@@ -18,8 +18,11 @@ Future<Album> makePostRequest(String title, String author) async {
     encoding: encoding,
   );
 
-  int statusCode = response.statusCode;
-  String responseBody = response.body;
+  if (response.statusCode == 201) {
+    return Album.fromJson(json.decode(response.body));
+  } else {
+    throw Exception('Failed to create album.');
+  }
 }
 
 class Album {
